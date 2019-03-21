@@ -1,0 +1,18 @@
+version: '2.4'
+
+services:
+  nginx:
+    image: nginx:1.9
+    volumes:
+      - .:/srv
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d/
+    environment:
+      DOMAIN_NAME: default:samplephpwebsite.local
+    ports:
+      - "8081:80"
+
+  php:
+    build: docker/php
+    image: samplephpwebsite:v1
+    volumes:
+      - .:/srv
