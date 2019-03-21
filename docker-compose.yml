@@ -1,0 +1,34 @@
+version: '2.4'
+
+services:
+  nginx:
+    image: nginx:1.12
+    volumes:
+      - .:/srv
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d/
+    environment:
+      DOMAIN_NAME: default:samplephpwebsite.local
+    depends_on:
+      - db
+      - php
+
+  php:
+    build: docker/php
+    image: samplephpwebsite_php:v3
+    volumes:
+      - .:/srv
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.1
+    volumes:
+      - mariadb:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: php_user
+      MYSQL_DATABASE: db
+      MYSQL_PASSWORD: sdrugntqqsciur
+
+volumes:
+  mariadb: ~
