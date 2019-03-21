@@ -8,9 +8,12 @@ services:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d/
     environment:
       DOMAIN_NAME: default:samplephpwebsite.local
+    ports:
+      - "8081:80"
 
   php:
     build: docker/php
     image: samplephpwebsite_php:v2
     volumes:
       - .:/srv
+    working_dir: /srv
