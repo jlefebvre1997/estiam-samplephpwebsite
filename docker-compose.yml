@@ -14,3 +14,4 @@ services:
     image: samplephpwebsite_php:v2
     volumes:
       - .:/srv
+    working_dir: /srv
