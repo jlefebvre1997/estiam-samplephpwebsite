@@ -9,6 +9,9 @@ job('My Job 1') {
         scm('H/5 * * * *')
     }
     steps {
-        shell("docker-compose up -d")
+        shell("ls")
+        shell("docker-compose up -d php")
+        shell("docker-compose exec -T php composer install")
+        shell("docker-compose exec -T php ./vendor/bin/phpunit test.php")
     }
 }

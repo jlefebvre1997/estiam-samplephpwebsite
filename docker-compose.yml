@@ -11,6 +11,8 @@ services:
     depends_on:
       - db
       - php
+    ports:
+      - "8081:80"
 
   php:
     build: docker/php
@@ -19,6 +21,7 @@ services:
       - .:/srv
     depends_on:
       - db
+    working_dir: /srv
 
   db:
     image: mariadb:10.1
