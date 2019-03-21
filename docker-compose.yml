@@ -1,0 +1,16 @@
+version: '2.4'
+
+services:
+  nginx:
+    image: nginx:1.12
+    volumes:
+      - .:/srv
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d/
+    environment:
+      DOMAIN_NAME: default:samplephpwebsite.local
+
+  php:
+    build: docker/php
+    image: samplephpwebsite_php:v2
+    volumes:
+      - .:/srv
