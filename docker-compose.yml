@@ -12,7 +12,8 @@ services:
       - "8081:80"
 
   php:
-    build: docker/php
+    build: .
     image: samplephpwebsite:v1
     volumes:
       - .:/srv
+    working_dir: /srv
