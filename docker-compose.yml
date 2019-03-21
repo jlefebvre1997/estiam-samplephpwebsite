@@ -1,17 +1,13 @@
 version: '2.4'
 
 services:
-  nginx:
-    image: nginx:1.12
+  jenkins:
+    build: .
     volumes:
-      - .:/srv
-      - ./docker/nginx/conf.d:/etc/nginx/conf.d/
-    environment:
-      DOMAIN_NAME: default:samplephpwebsite.local
+      - /var/jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8080:8080"
 
-  php:
-    build: docker/php
-    image: samplephpwebsite_php:v2
-    volumes:
-      - .:/srv
-    working_dir: /srv
+volumes:
+  jenkins_home: ~
